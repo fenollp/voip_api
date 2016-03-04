@@ -1,4 +1,5 @@
 require 'savon'
+require 'yaml'
 
 module VoipApi
 
@@ -34,6 +35,10 @@ module VoipApi
 
       # Invoke the call to the API
       begin
+        puts YAML::dump(savon_client)
+        # request = savon_client.build_request(api_method, message: params)
+        # puts YAML::dump(request.body)
+        # puts YAML::dump(request.headers)
         savon_response = savon_client.call(api_method, message: params)
       rescue Savon::Error => error
         Logger.log "Savon Error Encountered: #{error.http.code} #{error.message}"
